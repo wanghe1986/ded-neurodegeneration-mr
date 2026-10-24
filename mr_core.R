@@ -34,12 +34,23 @@ harmonize_pair <- function(exp_dat, out_dat) {
   status[swapped] <- "swapped"
   flip[swapped] <- TRUE
 
-  # 情况3: 回文 (A/T 或 G/C), 方向不可判定
+  # 情况3: 结局文件记在互补链上 (如暴露 A/G 而结局 T/C) —— 链翻转后可用
+  #   同一等位基因的互补链表示, beta 不需要翻转
+  fl <- status == "" & comp(ea1) == ea2 & comp(oa1) == oa2
+  status[fl] <- "flipped"
+  #   互补且互换: 结局的效应等位对应暴露的非效应等位, 需翻转 beta
+  fls <- status == "" & comp(ea1) == oa2 & comp(oa1) == ea2
+  status[fls] <- "flipped_swapped"
+  flip[fls] <- TRUE
+  # 注: 暴露侧回文 SNP 已在构建工具集时剔除, 故上述两类不会出现方向歧义;
+  #     若 ea1/oa1 为回文, comp(ea1)==oa1, 两类条件分别退化为 swapped / direct, 已被上面捕获。
+
+  # 情况4: 回文 (A/T 或 G/C), 方向不可判定
   pal <- comp(ea1) == oa1
   ambiguous <- !same & !swapped & pal
   status[ambiguous] <- "ambiguous"
 
-  # 情况4: 其他不匹配
+  # 情况5: 其他不匹配
   status[status == ""] <- "mismatch"
 
   d$harmonize_status <- status
@@ -48,7 +59,7 @@ harmonize_pair <- function(exp_dat, out_dat) {
   d$beta.out[flip] <- -d$beta.out[flip]
 
   # 只保留可判定方向的
-  d <- d[d$harmonize_status %in% c("direct", "swapped"), ]
+  d <- d[d$harmonize_status %in% c("direct", "swapped", "flipped", "flipped_swapped"), ]
   d
 }
 
