@@ -149,24 +149,33 @@ def add_table(header, rows, widths, align=None):
 # ================================================================ Table 1
 caption('Table 1. Data sources and sample sizes')
 T1 = [
-    ['Dry eye disease', 'Exposure (primary)', 'Million Veteran Program, PheCode 375.1, GCST90475895',
+    ['Dry eye disease', 'Exposure (primary)',
+     'Million Veteran Program phenome-wide scan, PheCode 375.1, GCST90475895 (ref. 12)',
      '84,262', '314,374', 'European'],
-    ['Dry eye disease', 'Exposure (sensitivity)', 'Million Veteran Program multi-ancestry meta-analysis, GCST90481119',
+    ['Dry eye disease', 'Exposure (sensitivity)',
+     'Million Veteran Program phenome-wide scan, multi-ancestry meta-analysis, GCST90481119 (ref. 12)',
      '124,106', '438,620', 'Multi-ancestry'],
-    ['Alzheimer disease', 'Outcome and reverse exposure', 'Bellenguez et al. 2022, GCST90027158',
+    ['Alzheimer disease', 'Outcome and reverse exposure', 'Bellenguez et al. 2022, GCST90027158 (ref. 13)',
      '85,934', '401,577', 'European'],
-    ['Parkinson disease', 'Outcome and reverse exposure', 'Nalls et al. 2019, GCST009325',
+    ['Parkinson disease', 'Outcome and reverse exposure', 'Nalls et al. 2019, GCST009325 (ref. 14)',
      '33,674', '449,056', 'European'],
-    ['Multiple sclerosis', 'Outcome', 'FinnGen release 12, G6_MS',
+    ['Multiple sclerosis', 'Outcome', 'FinnGen release 12, G6_MS (ref. 15)',
      '2,926', '495,931', 'European (Finnish)'],
-    ['Multiple sclerosis', 'Reverse exposure', 'IMSGC 2013 ImmunoChip, GCST005531',
+    ['Multiple sclerosis', 'Reverse exposure', 'IMSGC 2013 ImmunoChip, GCST005531 (ref. 16)',
      '14,498', '24,091', 'European'],
 ]
 add_table(['Trait', 'Role in the analysis', 'Source and accession', 'Cases', 'Controls', 'Ancestry'],
           T1, [1.4, 1.5, 3.0, 0.8, 0.9, 1.1], align=['l', 'l', 'l', 'c', 'c', 'l'])
 footnote('IMSGC, International Multiple Sclerosis Genetics Consortium; MVP, Million Veteran Program. '
-         'Case and control counts are study-level totals as reported in the source publications. '
-         'The multiple sclerosis outcome (FinnGen release 12) and the multiple sclerosis instrument set '
+         'Reference numbers are those of the manuscript reference list. Case and control counts are the '
+         'study-level totals reported with each GWAS Catalog study record; they replace the per-variant '
+         'counts carried in the harmonized files, which would otherwise deflate the effective sample '
+         'size used in Steiger testing. Both dry eye datasets come from the same MVP phenome-wide scan '
+         '(reference 12); the multi-ancestry total is the sum of the European, African American, '
+         'Hispanic, and East Asian strata. A larger MVP dry eye GWAS based on a chart-validated '
+         'algorithm (132,637 cases, 352,201 controls; reference 7) has since been published but '
+         'releases summary statistics only through controlled access, so it was not available. The '
+         'multiple sclerosis outcome (FinnGen release 12) and the multiple sclerosis instrument set '
          '(IMSGC 2013 ImmunoChip) are drawn from different studies, so no sample overlap arises in the '
          'reverse-direction analysis.')
 
