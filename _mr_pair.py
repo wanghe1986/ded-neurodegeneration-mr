@@ -50,13 +50,17 @@ def harmonize(iv, out):
         if (e1, o1) == (e2, o2):
             st = 'direct'
         elif (e1, o1) == (o2, e2):
+            # 结局文件的 effect allele 是暴露的 other allele:
+            # 结局 beta 对应 per-other-allele, 换算到 per-effect-allele 只翻结局
             st = 'swapped'
-            b_x, b_y = -b_x, -b_y
+            b_y = -b_y
         elif (c1, c2) == (e2, o2):
+            # 互补链同序: 结局 ea 是暴露 ea 的互补记法, 物理同一等位基因, 符号不变
             st = 'flipped'
         elif (c1, c2) == (o2, e2):
+            # 互补链反序: 结局 ea 对应暴露 other allele, 需翻结局
             st = 'flipped_swapped'
-            b_x, b_y = -b_x, -b_y
+            b_y = -b_y
         elif c1 == o1:          # 回文，方向不可判定
             st = 'ambiguous'
         else:
