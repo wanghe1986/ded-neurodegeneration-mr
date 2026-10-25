@@ -6,6 +6,8 @@ disease: a bidirectional two-sample Mendelian randomization study"* (submitted t
 The study tests, in both directions, whether genetic liability to dry eye disease is causally
 related to Alzheimer disease, Parkinson disease, and multiple sclerosis.
 
+**Canonical repository:** https://github.com/wanghe1986/ded-neurodegeneration-mr
+
 ## What is in this repository
 
 | File | Purpose |
